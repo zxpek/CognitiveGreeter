@@ -16,8 +16,6 @@ import cv2
 '''
 Params
 '''
-KEY = '{Your key here}'    
-GROUP = "{YourGroupID}"
 URL_BASE = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/"
 
 '''
@@ -34,7 +32,7 @@ def take_snapshot():
 '''
 Detect
 '''
-def detect():
+def detect(KEY):
     headers = {
         # Request headers
         'Content-Type': 'application/octet-stream',
@@ -58,7 +56,7 @@ def detect():
 '''
 Identify
 '''
-def identify(faceIds):
+def identify(faceIds, KEY, GROUP):
     iden_headers = {
         # Request headers
         'Content-Type' : 'application/json',
@@ -87,9 +85,8 @@ def identify(faceIds):
 '''
 Person
 '''
-def namePersons(identities):
+def namePersons(identities, KEY, GROUP):
     person_headers = {
-        # Request headers
         'Ocp-Apim-Subscription-Key': KEY,
     }
     names = []
@@ -105,10 +102,10 @@ def namePersons(identities):
 '''
 Wrap
 '''
-def findFace():
+def findFace(key, groupid):
     take_snapshot()
-    faceIds = detect()
-    identities = identify(faceIds)
-    names = namePersons(identities)
+    faceIds = detect(key)
+    identities = identify(faceIds, key, groupid)
+    names = namePersons(identities, key, groupid)
     return(names)
 

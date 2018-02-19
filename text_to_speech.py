@@ -6,27 +6,26 @@ Created on Wed Feb 14 17:39:23 2018
 """
 import urllib.request
 import vlc
-import sys
+import time
 
 '''
-Define URLs, Keys
+Define URLs, params
 '''
 syn_url = "https://speech.platform.bing.com/synthesize"
 token_url = "https://api.cognitive.microsoft.com/sts/v1.0/issueToken"
-key = "YOUR KEY HERE"
+token_time = 0
 audio_format = "audio-16khz-32kbitrate-mono-mp3"
-
 '''
 Functions
 '''
-def getToken(key=key):
-    token_header = {'Ocp-Apim-Subscription-Key': key, 'Content-Length':0}
+def getToken(TTS_KEY):
+    token_header = {'Ocp-Apim-Subscription-Key': TTS_KEY, 'Content-Length':0}
     token_req = urllib.request.Request(token_url,str.encode("a"), headers=token_header)
     token_r = urllib.request.urlopen(token_req)
     token = token_r.read()
     return(token)
 
-def getAudio(name, token):
+def getAudio(name, token, audio_format = audio_format):
     syn_header = {'X-Microsoft-OutputFormat':audio_format,
                   'Content-Type': 'application/ssml+xml',
                   'Authorization': 'Bearer ' + token.decode('utf-8')
@@ -44,13 +43,7 @@ def playAudio(output):
     p = vlc.MediaPlayer('./play.mp3')
     p.play()
     
-def say(name):
-    token = getToken()
+def say(name, TTS_KEY):
+    token = getToken(TTS_KEY)
     audio = getAudio(name, token)
     playAudio(audio)
-
-'''
-Run
-'''
-if __name__ == "__main__":
-    say(sys.argv)
