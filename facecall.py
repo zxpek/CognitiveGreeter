@@ -16,8 +16,8 @@ import cv2
 '''
 Params
 '''
-KEY = '{Get your key here}'    
-GROUP = "7e7c0e8b-d702-478a-80fa-74248503371a"
+KEY = '{Your key here}'    
+GROUP = "{YourGroupID}"
 URL_BASE = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/"
 
 '''
@@ -90,7 +90,7 @@ Person
 def namePersons(identities):
     person_headers = {
         # Request headers
-        'Ocp-Apim-Subscription-Key': '43dc2c2704e848d2adfc099c36cf32d6',
+        'Ocp-Apim-Subscription-Key': KEY,
     }
     names = []
     for identity in identities:

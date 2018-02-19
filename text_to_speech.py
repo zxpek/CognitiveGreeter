@@ -13,7 +13,7 @@ Define URLs, Keys
 '''
 syn_url = "https://speech.platform.bing.com/synthesize"
 token_url = "https://api.cognitive.microsoft.com/sts/v1.0/issueToken"
-key = "76b737079e304ac58e44f81636a1ce71"
+key = 
 audio_format = "audio-16khz-32kbitrate-mono-mp3"
 
 '''
